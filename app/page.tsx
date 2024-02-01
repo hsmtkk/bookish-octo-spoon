@@ -4,10 +4,6 @@ import Hero from "@/components/hero";
 
 export default function Home() {
   return (<>
-    <Header />
-    <main>
-      <Hero />
-    </main>
-    <Footer />
+    <Hero title="CUBE" subtitle="アウトプットしていくサイト" imageOn={true} />
   </>)
 }
