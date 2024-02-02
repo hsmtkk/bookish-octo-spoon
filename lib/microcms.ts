@@ -19,3 +19,18 @@ export async function getPostBySlug(slug: string) {
         console.log(err)
     }
 }
+
+export async function getAllSlugs(limit = 100) {
+    try {
+        const slugs = await client.get({
+            customRequestInit: {
+                cache: "no-store",
+            },
+            endpoint: "blogs",
+            queries: { fields: "title.slug", orders: "-publishDate", limit: limit },
+        })
+        return slugs.contents
+    } catch (err) {
+        console.log(err)
+    }
+}

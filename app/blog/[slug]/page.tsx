@@ -5,20 +5,25 @@ import PostBody from "@/components/post-body";
 import PostCategories from "@/components/post-categories";
 import PostHeader from "@/components/post-header";
 import { TwoColumn, TwoColumnMain, TwoColumnSidebar } from "@/components/two-column";
+import { eyecatchLocal } from "@/lib/constant";
 import { extractText } from "@/lib/extract-text";
 import { getPostBySlug } from "@/lib/microcms";
 import Image from "next/image";
+import { getPlaiceholder } from "plaiceholder";
 
-export default async function Schedule() {
-    const slug = "schedule"
+export default async function Post({ params }: { params: { slug: string } }) {
+    const slug = params.slug
     const post = await getPostBySlug(slug)
     const title = post.title
     const publish = post.publishDate
     const content = post.content
-    const eyecatch = post.eyecatch
+    const eyecatch = post.eyecatch ?? eyecatchLocal
     const categories = post.categories
 
     const description = extractText(post.content)
+
+    const { base64 } = await getPlaiceholder(eyecatch.url)
+    eyecatch.blurDataURL = base64
 
     return (
         <Container>
@@ -26,7 +31,7 @@ export default async function Schedule() {
             <article>
                 <PostHeader title={title} subtitle="Blog Article" publish={publish} />
                 <figure>
-                    <Image src={eyecatch.url} alt="" layout="responsive" width={eyecatch.width} height={eyecatch.height} sizes="(min-width:1152px) 1152px, 100vw" priority />
+                    <Image src={eyecatch.url} alt="" layout="responsive" width={eyecatch.width} height={eyecatch.height} sizes="(min-width:1152px) 1152px, 100vw" priority placeholder="blur" blurDataURL={eyecatch.blurDataURL} />
                 </figure>
                 <TwoColumn>
                     <TwoColumnMain>
