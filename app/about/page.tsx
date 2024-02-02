@@ -5,11 +5,17 @@ import PostBody from "@/components/post-body";
 import { TwoColumn, TwoColumnMain, TwoColumnSidebar } from "@/components/two-column";
 import Image from "next/image";
 import about from "@/public/images/about.jpg"
+import Meta from "@/components/meta";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+    title: "アバウト | CUBE",
+}
 
 export default function About() {
     return (
         <Container>
+            <Meta pageTitle="アバウト" />
             <Hero title="About" subtitle="About development activities" />
             <figure>
                 <Image src={about} alt="eyecatch" layout="responsive" sizes="(min-width: 1152px) 1152px, 100vw" priority placeholder="blur" />
