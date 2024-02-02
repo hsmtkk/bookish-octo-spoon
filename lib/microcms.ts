@@ -8,6 +8,9 @@ export const client = createClient({
 export async function getPostBySlug(slug: string) {
     try {
         const post = await client.get({
+            customRequestInit: {
+                cache: "no-store",
+            },
             endpoint: "blogs",
             queries: { filters: `slug[equals]${slug}` },
         })

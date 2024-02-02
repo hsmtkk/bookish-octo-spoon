@@ -1,9 +1,10 @@
 import Container from "@/components/container";
 import ConvertBody from "@/components/convert-body";
 import PostBody from "@/components/post-body";
+import PostCategories from "@/components/post-categories";
 import PostHeader from "@/components/post-header";
 import { TwoColumn, TwoColumnMain, TwoColumnSidebar } from "@/components/two-column";
-import { client, getPostBySlug } from "@/lib/microcms";
+import { getPostBySlug } from "@/lib/microcms";
 import Image from "next/image";
 
 export default async function Schedule() {
@@ -27,7 +28,7 @@ export default async function Schedule() {
                         <PostBody><ConvertBody contentHTML={content} /></PostBody>
                     </TwoColumnMain>
                     <TwoColumnSidebar>
-                        <></>
+                        <PostCategories categories={categories} />
                     </TwoColumnSidebar>
                 </TwoColumn>
             </article>
